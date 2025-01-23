@@ -8,7 +8,7 @@ import z from "zod";
 const requestSchema = z.object({
   url: z.string().url({ message: "Invalid URL format" }),
   method: z.enum(["GET", "POST", "PUT", "DELETE"], { invalid_type_error: "Invalid HTTP method" }),
-  body: z.record(z.any()).optional(), // Body can be optional
+  body: z.record(z.any()).nullable().optional(), // Body can be optional
   headers: z.record(z.string()).optional(),
 });
 
@@ -36,10 +36,10 @@ class ProxyController  {
       });
     }
   
-    const { url, method, body, headers } = validationResult.data;
+    const { url, method, body, headers } = validationResult.data; 
+    console.log(body);
     // const proxyAuthorization = req.headers["proxy-authorization"] as string;
     const proxyAuthorization = "cHJvamVjdG9wc0BhbmRlcmJhaGVyLmNvbTpBVEFUVDN4RmZHRjBtTEFyb1dqY1pzem5nQ3pDR2lVTjBWWklXOWMxdzh4NUpWSFNFVW45TnRCREtVSHFCOG9DV1k3eG83QUt1RmNRNWstejFZaEd2eGtMcUJ5dTF5XzRqU25tdF9UQmh5eXEyN3lfSW8yNWF6QThPQ09IaGJqLTFyV2VHSFhIeFBnSXNieWJpcTR2bU5FQlpNcTVPQWQ4UUdWUUVwQmhCdUtONTF6dW5ScU1ZTVE9NDY0NUVBMjM=";
-  
     if (!proxyAuthorization) {
       return res.status(StatusCodes.UNAUTHORIZED).json({
         message: "Missing proxy-authorization in request",
@@ -68,7 +68,8 @@ class ProxyController  {
       const response = await this.httpService.makeRequest({
         method,
         url,
-        headers: requestHeaders,
+        headers: requestHeaders, 
+        body: body ? JSON.stringify(body) : undefined,
       });
       res.status(response.status).set(response.headers).send(response.data);
       return res;
