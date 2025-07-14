@@ -39,7 +39,7 @@ class ProxyController  {
     const { url, method, body, headers } = validationResult.data; 
     console.log(body);
     // const proxyAuthorization = req.headers["proxy-authorization"] as string;
-    const proxyAuthorization = "cHJvamVjdG9wc0BhbmRlcmJhaGVyLmNvbTpBVEFUVDN4RmZHRjBtTEFyb1dqY1pzem5nQ3pDR2lVTjBWWklXOWMxdzh4NUpWSFNFVW45TnRCREtVSHFCOG9DV1k3eG83QUt1RmNRNWstejFZaEd2eGtMcUJ5dTF5XzRqU25tdF9UQmh5eXEyN3lfSW8yNWF6QThPQ09IaGJqLTFyV2VHSFhIeFBnSXNieWJpcTR2bU5FQlpNcTVPQWQ4UUdWUUVwQmhCdUtONTF6dW5ScU1ZTVE9NDY0NUVBMjM=";
+    const proxyAuthorization = "cHJvamVjdG9wc0BhbmRlcmJhaGVyLmNvbTpBVEFUVDN4RmZHRjAzSXpfSG5BTnpRVXhCTHhQRjFxeXFzNTl0LUNzdWEyYUNnQmUwcldjTklXVktjNkZRNTNDWWg0Z2stQmsxWk03eTNJVGo1bUJmanZIeDdmN0g5RlpUdFNxSEE1c3p3N2NacW1ySmI0SEF0eVpieV9od1Z6dEpmWmE2bGN6bF9tVExDY0p5OXM2TDR5U05zd3h5WHhMZE5aNERFTGFJTnBNeThtWHRvMlFhTmM9RTYzODFBODI=";
     if (!proxyAuthorization) {
       return res.status(StatusCodes.UNAUTHORIZED).json({
         message: "Missing proxy-authorization in request",
